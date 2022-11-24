@@ -31,6 +31,7 @@ outputs:
         - ninja
         - cmake
         - pkg-config
+        - python
         # We need all host deps also in build for cross-compiling
         - libgz-math7  # [build_platform != target_platform]
         - libgz-tools2  # [build_platform != target_platform]
