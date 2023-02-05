@@ -18,7 +18,7 @@ source:
       - 319.patch
 
 build:
-  number: 2
+  number: 0
 
 outputs:
   - name: {{ cxx_name }}
