@@ -78,7 +78,7 @@ about:
   home: https://github.com/gazebosim/{{ repo_name }}
   license: Apache-2.0
   license_file: LICENSE
-  summary: 'Messages for Gazebo robot simulation.'
+  summary: Messages for Gazebo robot simulation.
 
 extra:
   feedstock-name: {{ repo_name }}
