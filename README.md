@@ -1,11 +1,11 @@
-About gz-msgs
-=============
+About gz-msgs-feedstock
+=======================
+
+Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/gz-msgs-feedstock/blob/main/LICENSE.txt)
 
 Home: https://github.com/gazebosim/gz-msgs
 
 Package license: Apache-2.0
-
-Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/gz-msgs-feedstock/blob/main/LICENSE.txt)
 
 Summary: Messages for Gazebo robot simulation.
 
