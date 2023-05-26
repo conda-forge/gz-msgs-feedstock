@@ -1,0 +1,14 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index d5164d92..ca7ecfeb 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -62,9 +62,7 @@ message(STATUS "\n\n-- ====== Finding Dependencies ======")
+ 
+ #--------------------------------------
+ # Find Protobuf
+-set(REQ_PROTOBUF_VER 3)
+ gz_find_package(GzProtobuf
+-                 VERSION ${REQ_PROTOBUF_VER}
+                  REQUIRED
+                  COMPONENTS all
+                  PRETTY Protobuf)
