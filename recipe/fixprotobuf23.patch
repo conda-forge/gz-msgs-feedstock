@@ -1,0 +1,61 @@
+From ec1dababa779a262d08b445c904dba5784c56833 Mon Sep 17 00:00:00 2001
+From: Silvio Traversaro <silvio@traversaro.it>
+Date: Wed, 31 May 2023 01:30:07 +0200
+Subject: [PATCH] Fix protobuf 23
+
+---
+ CMakeLists.txt     | 9 +++++++--
+ src/CMakeLists.txt | 4 ++--
+ 2 files changed, 9 insertions(+), 4 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index d3376fa8..82cf4b50 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -67,6 +67,13 @@ set(
+   "gz_msgs_gen executable used in the gz_msgs_protoc CMake function.")
+ mark_as_advanced(GZ_MSGS_GEN_EXECUTABLE)
+ 
++set(
++  GZ_MSGS_PROTOC_EXECUTABLE
++  "$<TARGET_FILE:protobuf::protoc>"
++  CACHE STRING
++  "protoc executable used in the gz_msgs_protoc CMake function.")
++mark_as_advanced(GZ_MSGS_PROTOC_EXECUTABLE)
++
+ # TODO(CH3): Deprecated. Remove IGN_MSGS CMake variables on tick-tock.
+ set(
+   IGN_MSGS_GEN_EXECUTABLE
+@@ -82,9 +89,7 @@ message(STATUS "\n\n-- ====== Finding Dependencies ======")
+ 
+ #--------------------------------------
+ # Find Protobuf
+-set(REQ_PROTOBUF_VER 3)
+ gz_find_package(GzProtobuf
+-                 VERSION ${REQ_PROTOBUF_VER}
+                  REQUIRED
+                  COMPONENTS all
+                  PRETTY Protobuf)
+diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
+index 236f12f1..d9221c5e 100644
+--- a/src/CMakeLists.txt
++++ b/src/CMakeLists.txt
+@@ -110,7 +110,7 @@ function(gz_msgs_protoc)
+ 
+ 
+   set(GENERATE_ARGS
+-      --protoc-exec "$<TARGET_FILE:${gz_msgs_protoc_PROTOC_EXEC}>"
++      --protoc-exec "${gz_msgs_protoc_PROTOC_EXEC}"
+       --gz-generator-bin "${GZ_MSGS_GEN_EXECUTABLE}"
+       --proto-path "${gz_msgs_protoc_PROTO_PATH}"
+       --input-path "${ABS_FIL}"
+@@ -158,7 +158,7 @@ foreach(proto_file ${proto_files})
+     INPUT_PROTO
+       ${proto_file}
+     PROTOC_EXEC
+-      protobuf::protoc
++      ${GZ_MSGS_PROTOC_EXECUTABLE}
+     OUTPUT_CPP_DIR
+       "${PROJECT_BINARY_DIR}/include"
+     OUTPUT_RUBY_DIR
+

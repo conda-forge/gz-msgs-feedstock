@@ -35,7 +35,7 @@ mkdir build
 cd build
 
 if [[ "${CONDA_BUILD_CROSS_COMPILATION}" == "1" ]]; then
-  export CMAKE_ARGS="${CMAKE_ARGS} -DProtobuf_PROTOC_EXECUTABLE=$BUILD_PREFIX/bin/protoc -DGZ_MSGS_GEN_EXECUTABLE:BOOL=$BUILD_PREFIX/bin/gz_msgs_gen"
+  export CMAKE_ARGS="${CMAKE_ARGS} -DGZ_MSGS_PROTOC_EXECUTABLE=$BUILD_PREFIX/bin/protoc -DGZ_MSGS_GEN_EXECUTABLE:BOOL=$BUILD_PREFIX/bin/gz_msgs_gen"
 fi
 
 cmake ${CMAKE_ARGS} -GNinja .. \

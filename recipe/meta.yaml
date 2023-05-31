@@ -14,9 +14,11 @@ package:
 source:
   - url: https://github.com/gazebosim/{{ repo_name }}/archive/{{ repo_name }}{{ version }}.tar.gz
     sha256: 59a1254c5ee38332856dd85d13440eae6b597fb933009fba3fa4ce26f321027f
+    patches:
+      - fixprotobuf23.patch
 
 build:
-  number: 0
+  number: 1
 
 outputs:
   - name: {{ cxx_name }}
@@ -37,11 +39,13 @@ outputs:
         - libgz-math7  # [build_platform != target_platform]
         - libgz-tools2  # [build_platform != target_platform]
         - tinyxml2  # [build_platform != target_platform]
+        - libabseil  # [build_platform != target_platform]
         - libprotobuf  # [build_platform != target_platform]
       host:
         - libgz-math7
         - libgz-tools2
         - tinyxml2
+        - libabseil
         - libprotobuf
     test:
       commands:
