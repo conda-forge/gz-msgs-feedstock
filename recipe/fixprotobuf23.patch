@@ -54,7 +54,7 @@ index 236f12f1..d9221c5e 100644
        ${proto_file}
      PROTOC_EXEC
 -      protobuf::protoc
-+      ${gz_msgs_protoc_PROTOC_EXEC}
++      ${GZ_MSGS_PROTOC_EXECUTABLE}
      OUTPUT_CPP_DIR
        "${PROJECT_BINARY_DIR}/include"
      OUTPUT_RUBY_DIR
