@@ -26,16 +26,6 @@ index d3376fa8..82cf4b50 100644
  # TODO(CH3): Deprecated. Remove IGN_MSGS CMake variables on tick-tock.
  set(
    IGN_MSGS_GEN_EXECUTABLE
-@@ -82,9 +89,7 @@ message(STATUS "\n\n-- ====== Finding Dependencies ======")
- 
- #--------------------------------------
- # Find Protobuf
--set(REQ_PROTOBUF_VER 3)
- gz_find_package(GzProtobuf
--                 VERSION ${REQ_PROTOBUF_VER}
-                  REQUIRED
-                  COMPONENTS all
-                  PRETTY Protobuf)
 diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
 index 236f12f1..d9221c5e 100644
 --- a/src/CMakeLists.txt
