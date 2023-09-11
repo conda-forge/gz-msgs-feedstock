@@ -7,9 +7,9 @@ channel_targets:
 cxx_compiler:
 - vs2019
 libabseil:
-- '20230125'
+- '20230802'
 libprotobuf:
-- 4.23.3
+- 4.23.4
 target_platform:
 - win-64
 tinyxml2:
