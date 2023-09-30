@@ -1,6 +1,6 @@
 {% set component_name = "msgs" %}
 {% set repo_name = "gz-" + component_name %}
-{% set version = "9_9.5.0" %}
+{% set version = "10_10.0.0" %}
 {% set major_version = version.split('_')[0] %}
 {% set version_package = version.split('_')[1] %}
 {% set name = repo_name + major_version %}
@@ -13,12 +13,12 @@ package:
 
 source:
   - url: https://github.com/gazebosim/{{ repo_name }}/archive/{{ repo_name }}{{ version }}.tar.gz
-    sha256: b0ee93979a1aaf035b193006052fb6339a52511a3db04ec995f79e39ef798b14
+    sha256: 81afeb973252ffabcbab1372271efac2d3dbd52679916b495000215f43d54997
     patches:
       - fixprotobuf23.patch
 
 build:
-  number: 1
+  number: 0
 
 outputs:
   - name: {{ cxx_name }}
