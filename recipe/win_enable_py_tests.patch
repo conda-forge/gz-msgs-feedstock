@@ -1,0 +1,22 @@
+From e83ea0a14b69e59b9fc8cf240f2b8bf3b6b743ba Mon Sep 17 00:00:00 2001
+From: Silvio Traversaro <silvio@traversaro.it>
+Date: Wed, 4 Oct 2023 10:14:52 +0200
+Subject: [PATCH] Enable Python tests on Windows
+
+---
+ python/CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/python/CMakeLists.txt b/python/CMakeLists.txt
+index fad895f1..ea22f1cb 100644
+--- a/python/CMakeLists.txt
++++ b/python/CMakeLists.txt
+@@ -7,7 +7,7 @@ configure_file(${PROJECT_SOURCE_DIR}/python/src/__init__.py.in ${python_init_fil
+ 
+ install(FILES ${python_init_file} DESTINATION ${GZ_PYTHON_INSTALL_PATH}/gz/${GZ_DESIGNATION}${PROJECT_VERSION_MAJOR} RENAME __init__.py)
+ 
+-if (BUILD_TESTING AND NOT WIN32)
++if (BUILD_TESTING)
+   set(python_tests
+     basic_TEST
+   )
