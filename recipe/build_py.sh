@@ -7,8 +7,8 @@ fi
 
 if [[ "$CONDA_BUILD_CROSS_COMPILATION" == 1 ]]; then
   (
-    mkdir -p build_cxx_host
-    pushd build_cxx_host
+    mkdir -p build_py_host
+    pushd build_py_host
 
     export CC=$CC_FOR_BUILD
     export CXX=$CXX_FOR_BUILD
@@ -29,30 +29,31 @@ if [[ "$CONDA_BUILD_CROSS_COMPILATION" == 1 ]]; then
   )
 fi
 
-mkdir build_cxx
-cd build_cxx
+mkdir build_py
+cd build_py
 
 if [[ "${CONDA_BUILD_CROSS_COMPILATION}" == "1" ]]; then
-  export CMAKE_ARGS="${CMAKE_ARGS} -Dgz-msgs10_PYTHON_INTERPRETER=$BUILD_PREFIX/bin/python -Dgz-msgs10_PROTOC_EXECUTABLE=$BUILD_PREFIX/bin/protoc -Dgz-msgs10_PROTO_GENERATOR_PLUGIN=$BUILD_PREFIX/bin/gz-msgs10_protoc_plugin"
+  export CMAKE_ARGS_FOR_PY_BUILD="-Dgz-msgs10_PYTHON_INTERPRETER=$BUILD_PREFIX/bin/python -Dgz-msgs10_PROTOC_EXECUTABLE=$BUILD_PREFIX/bin/protoc -Dgz-msgs10_PROTO_GENERATOR_PLUGIN=$BUILD_PREFIX/bin/gz-msgs10_protoc_plugin -DPython3_EXECUTABLE:PATH=$BUILD_PREFIX/bin/python -DPYTHON_EXECUTABLE:PATH=$BUILD_PREFIX/bin/python"
+else
+  export CMAKE_ARGS_FOR_PY_BUILD="-DPython3_EXECUTABLE:PATH=$PYTHON -DPYTHON_EXECUTABLE:PATH=$PYTHON"
 fi
 
-# Set Python install dir to wrong directory to ensure Python files
-# are not included in the libgz-msgs<major> package
-cmake ${CMAKE_ARGS} -DBUILD_TESTING:BOOL=ON -GNinja .. \
+echo "Printing env value ====>"
+env
+
+# Set CMAKE_INSTALL_PREFIX install dir to wrong directory to ensure C++ files
+# are not included in the gz-msgs<major>-python package
+cmake ${CMAKE_ARGS_FOR_PY_BUILD} -DCMAKE_INSTALL_PREFIX=$SRC_DIR/wrong_cxx_install -DBUILD_TESTING:BOOL=ON -GNinja .. \
       -DCMAKE_BUILD_TYPE=Release \
       -DCMAKE_INSTALL_SYSTEM_RUNTIME_LIBS_SKIP:BOOL=ON \
-      -DGZ_PYTHON_INSTALL_PATH=$SRC_DIR/wrong_py_install \
-      -DPython3_EXECUTABLE:PATH=$PYTHON \
-      -DPYTHON_EXECUTABLE:PATH=$PYTHON \
-      -DPython3_INCLUDE_DIR:PATH=$PREFIX/include/`ls $PREFIX/include | grep "python\|pypy"`
+      -DGZ_PYTHON_INSTALL_PATH=$SP_DIR \
+      -DUSE_SYSTEM_PATHS_FOR_PYTHON_INSTALLATION:BOOL=ON
 
 cmake --build . --config Release
 cmake --build . --config Release --target install
 
 export CTEST_OUTPUT_ON_FAILURE=1
 if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" != "1" || "${CROSSCOMPILING_EMULATOR}" != "" ]]; then
-  if [[ "${CONDA_BUILD_CROSS_COMPILATION}" != "" ]]; then
-      export CTEST_DISABLED_TESTS="INTEGRATION_gz_TEST"
-  fi
-  ctest -C Release -E "${CTEST_DISABLED_TESTS}|basic_TEST"
+  cd $SRC_DIR/python/test
+  pytest ./basic_TEST.py
 fi
