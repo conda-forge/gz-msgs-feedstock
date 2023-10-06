@@ -53,6 +53,7 @@ outputs:
         - tinyxml2
         - libabseil
         - libprotobuf
+        - dlfcn-win32  # [win]
       run:
         - python
     test:
