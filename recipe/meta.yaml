@@ -95,6 +95,7 @@ outputs:
         - python
         - protobuf
         - pytest
+        - dlfcn-win32  # [win]
       run:
         - python  >=3.8
         - protobuf
