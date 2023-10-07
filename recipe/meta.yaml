@@ -20,6 +20,7 @@ source:
       - 391.patch
       - 392.patch
       - 393.patch
+      - 394.patch
       - win_enable_cmd_install.patch
       - win_enable_py_tests.patch
       
