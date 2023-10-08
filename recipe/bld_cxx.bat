@@ -25,5 +25,7 @@ cmake --build . --config Release --target install
 if errorlevel 1 exit 1
 
 :: Test.
+:: Workaround for https://github.com/gazebosim/gz-msgs/pull/394
+del .\bin\gz-msgs10.dll
 ctest --output-on-failure -C Release -E "INTEGRATION_gz_TEST|basic_TEST"
 if errorlevel 1 exit 1
