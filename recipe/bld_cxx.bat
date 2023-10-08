@@ -12,6 +12,7 @@ cmake ^
     -DUSE_SYSTEM_PATHS_FOR_PYTHON_INSTALLATION:BOOL=ON ^
     -DPython3_EXECUTABLE:PATH=%PYTHON% ^
     -DPYTHON_EXECUTABLE:PATH=%PYTHON% ^
+    -DGZ_ENABLE_RELOCATABLE_INSTALL:BOOL=ON ^
     %SRC_DIR%
 if errorlevel 1 exit 1
 
@@ -24,5 +25,7 @@ cmake --build . --config Release --target install
 if errorlevel 1 exit 1
 
 :: Test.
-ctest -C Release -E "INTEGRATION_gz_TEST|basic_TEST"
+:: Workaround for https://github.com/gazebosim/gz-msgs/pull/394
+del .\bin\gz-msgs10.dll
+ctest --output-on-failure -C Release -E "INTEGRATION_gz_TEST|basic_TEST"
 if errorlevel 1 exit 1

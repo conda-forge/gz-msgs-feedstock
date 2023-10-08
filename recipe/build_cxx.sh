@@ -44,6 +44,7 @@ cmake ${CMAKE_ARGS} -DBUILD_TESTING:BOOL=ON -GNinja .. \
       -DGZ_PYTHON_INSTALL_PATH=$SRC_DIR/wrong_py_install \
       -DPython3_EXECUTABLE:PATH=$PYTHON \
       -DPYTHON_EXECUTABLE:PATH=$PYTHON \
+      -DGZ_ENABLE_RELOCATABLE_INSTALL:BOOL=ON \
       -DPython3_INCLUDE_DIR:PATH=$PREFIX/include/`ls $PREFIX/include | grep "python\|pypy"`
 
 cmake --build . --config Release
@@ -54,5 +55,5 @@ if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" != "1" || "${CROSSCOMPILING_EMULATOR}
   if [[ "${CONDA_BUILD_CROSS_COMPILATION}" != "" ]]; then
       export CTEST_DISABLED_TESTS="INTEGRATION_gz_TEST"
   fi
-  ctest -C Release -E "${CTEST_DISABLED_TESTS}|basic_TEST"
+  ctest --output-on-failure -C Release -E "${CTEST_DISABLED_TESTS}|basic_TEST"
 fi

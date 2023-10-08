@@ -20,11 +20,12 @@ source:
       - 391.patch
       - 392.patch
       - 393.patch
+      - 394.patch
       - win_enable_cmd_install.patch
       - win_enable_py_tests.patch
       
 build:
-  number: 0
+  number: 1
 
 outputs:
   - name: {{ cxx_name }}
@@ -53,6 +54,7 @@ outputs:
         - tinyxml2
         - libabseil
         - libprotobuf
+        - dlfcn-win32  # [win]
       run:
         - python
     test:
@@ -94,6 +96,7 @@ outputs:
         - python
         - protobuf
         - pytest
+        - dlfcn-win32  # [win]
       run:
         - python  >=3.8
         - protobuf
