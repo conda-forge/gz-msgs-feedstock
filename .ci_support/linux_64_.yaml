@@ -17,7 +17,7 @@ docker_image:
 libabseil:
 - '20230802'
 libprotobuf:
-- 4.24.3
+- 4.24.4
 target_platform:
 - linux-64
 tinyxml2:
