@@ -1,8 +1,7 @@
 {% set component_name = "msgs" %}
 {% set repo_name = "gz-" + component_name %}
-{% set version = "10_10.2.0" %}
-{% set major_version = version.split('_')[0] %}
-{% set version_package = version.split('_')[1] %}
+{% set version = "10.2.0" %}
+{% set major_version = version.split('.')[0] %}
 {% set name = repo_name + major_version %}
 {% set component_version = component_name + major_version %}
 {% set cxx_name = "lib" + name %}
@@ -14,13 +13,13 @@ package:
   version: {{ version_package }}
 
 source:
-  - url: https://github.com/gazebosim/{{ repo_name }}/archive/{{ repo_name }}{{ version }}.tar.gz
+  - url: https://github.com/gazebosim/{{ repo_name }}/archive/{{ repo_name }}{{ major_version }}_{{ version }}.tar.gz
     sha256: 03c9e1ca9e78446e5e81520f5f9fee47bfbda4b5379e4a76c53aa6a76190c2f6
     patches:
       - win_enable_py_tests.patch
 
 build:
-  number: 0
+  number: 1
 
 outputs:
   - name: {{ cxx_name }}
@@ -33,7 +32,7 @@ outputs:
       build:
         - {{ compiler('cxx') }}
         - {{ compiler('c') }}
-        - {{ stdlib("c") }}
+        - {{ stdlib('c') }}
         - ninja
         - cmake
         - pkg-config
