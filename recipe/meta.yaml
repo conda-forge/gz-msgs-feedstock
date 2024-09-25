@@ -31,6 +31,7 @@ outputs:
       build:
         - {{ compiler('cxx') }}
         - {{ compiler('c') }}
+        - {{ stdlib('c') }}
         - ninja
         - cmake
         - pkg-config
