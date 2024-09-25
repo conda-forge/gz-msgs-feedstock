@@ -18,7 +18,7 @@ source:
       - fixprotobuf23.patch
 
 build:
-  number: 8
+  number: 9
 
 outputs:
   - name: {{ cxx_name }}
@@ -31,6 +31,7 @@ outputs:
       build:
         - {{ compiler('cxx') }}
         - {{ compiler('c') }}
+        - {{ stdlib('c') }}
         - ninja
         - cmake
         - pkg-config

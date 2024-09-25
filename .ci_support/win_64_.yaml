@@ -1,5 +1,7 @@
 c_compiler:
 - vs2019
+c_stdlib:
+- vs
 channel_sources:
 - conda-forge
 channel_targets:
@@ -7,9 +9,9 @@ channel_targets:
 cxx_compiler:
 - vs2019
 libabseil:
-- '20240116'
+- '20240722'
 libprotobuf:
-- 4.25.3
+- 5.27.5
 target_platform:
 - win-64
 tinyxml2:
