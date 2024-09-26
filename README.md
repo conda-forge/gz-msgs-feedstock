@@ -81,9 +81,9 @@ Current release info
 
 | Name | Downloads | Version | Platforms |
 | --- | --- | --- | --- |
-| [![Conda Recipe](https://img.shields.io/badge/recipe-gz--msgs10-green.svg)](https://anaconda.org/conda-forge/gz-msgs10) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/gz-msgs10.svg)](https://anaconda.org/conda-forge/gz-msgs10) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/gz-msgs10.svg)](https://anaconda.org/conda-forge/gz-msgs10) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/gz-msgs10.svg)](https://anaconda.org/conda-forge/gz-msgs10) |
-| [![Conda Recipe](https://img.shields.io/badge/recipe-gz--msgs10--python-green.svg)](https://anaconda.org/conda-forge/gz-msgs10-python) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/gz-msgs10-python.svg)](https://anaconda.org/conda-forge/gz-msgs10-python) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/gz-msgs10-python.svg)](https://anaconda.org/conda-forge/gz-msgs10-python) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/gz-msgs10-python.svg)](https://anaconda.org/conda-forge/gz-msgs10-python) |
-| [![Conda Recipe](https://img.shields.io/badge/recipe-libgz--msgs10-green.svg)](https://anaconda.org/conda-forge/libgz-msgs10) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/libgz-msgs10.svg)](https://anaconda.org/conda-forge/libgz-msgs10) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/libgz-msgs10.svg)](https://anaconda.org/conda-forge/libgz-msgs10) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/libgz-msgs10.svg)](https://anaconda.org/conda-forge/libgz-msgs10) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-gz--msgs11-green.svg)](https://anaconda.org/conda-forge/gz-msgs11) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/gz-msgs11.svg)](https://anaconda.org/conda-forge/gz-msgs11) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/gz-msgs11.svg)](https://anaconda.org/conda-forge/gz-msgs11) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/gz-msgs11.svg)](https://anaconda.org/conda-forge/gz-msgs11) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-gz--msgs11--python-green.svg)](https://anaconda.org/conda-forge/gz-msgs11-python) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/gz-msgs11-python.svg)](https://anaconda.org/conda-forge/gz-msgs11-python) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/gz-msgs11-python.svg)](https://anaconda.org/conda-forge/gz-msgs11-python) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/gz-msgs11-python.svg)](https://anaconda.org/conda-forge/gz-msgs11-python) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-libgz--msgs11-green.svg)](https://anaconda.org/conda-forge/libgz-msgs11) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/libgz-msgs11.svg)](https://anaconda.org/conda-forge/libgz-msgs11) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/libgz-msgs11.svg)](https://anaconda.org/conda-forge/libgz-msgs11) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/libgz-msgs11.svg)](https://anaconda.org/conda-forge/libgz-msgs11) |
 
 Installing gz-msgs
 ==================
@@ -95,41 +95,41 @@ conda config --add channels conda-forge
 conda config --set channel_priority strict
 ```
 
-Once the `conda-forge` channel has been enabled, `gz-msgs10, gz-msgs10-python, libgz-msgs10` can be installed with `conda`:
+Once the `conda-forge` channel has been enabled, `gz-msgs11, gz-msgs11-python, libgz-msgs11` can be installed with `conda`:
 
 ```
-conda install gz-msgs10 gz-msgs10-python libgz-msgs10
-```
-
-or with `mamba`:
-
-```
-mamba install gz-msgs10 gz-msgs10-python libgz-msgs10
-```
-
-It is possible to list all of the versions of `gz-msgs10` available on your platform with `conda`:
-
-```
-conda search gz-msgs10 --channel conda-forge
+conda install gz-msgs11 gz-msgs11-python libgz-msgs11
 ```
 
 or with `mamba`:
 
 ```
-mamba search gz-msgs10 --channel conda-forge
+mamba install gz-msgs11 gz-msgs11-python libgz-msgs11
+```
+
+It is possible to list all of the versions of `gz-msgs11` available on your platform with `conda`:
+
+```
+conda search gz-msgs11 --channel conda-forge
+```
+
+or with `mamba`:
+
+```
+mamba search gz-msgs11 --channel conda-forge
 ```
 
 Alternatively, `mamba repoquery` may provide more information:
 
 ```
 # Search all versions available on your platform:
-mamba repoquery search gz-msgs10 --channel conda-forge
+mamba repoquery search gz-msgs11 --channel conda-forge
 
-# List packages depending on `gz-msgs10`:
-mamba repoquery whoneeds gz-msgs10 --channel conda-forge
+# List packages depending on `gz-msgs11`:
+mamba repoquery whoneeds gz-msgs11 --channel conda-forge
 
-# List dependencies of `gz-msgs10`:
-mamba repoquery depends gz-msgs10 --channel conda-forge
+# List dependencies of `gz-msgs11`:
+mamba repoquery depends gz-msgs11 --channel conda-forge
 ```
 
 
