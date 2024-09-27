@@ -38,13 +38,15 @@ outputs:
         - pkg-config
         - python
         # We need all host deps also in build for cross-compiling
-        - libgz-math7  # [build_platform != target_platform]
+        - libgz-cmake4  # [build_platform != target_platform]
+        - libgz-math8  # [build_platform != target_platform]
         - libgz-tools2  # [build_platform != target_platform]
         - tinyxml2  # [build_platform != target_platform]
         - libabseil  # [build_platform != target_platform]
         - libprotobuf  # [build_platform != target_platform]
       host:
-        - libgz-math7
+        - libgz-cmake4
+        - libgz-math8
         - libgz-tools2
         - tinyxml2
         - libabseil
@@ -78,13 +80,13 @@ outputs:
         - pkg-config
         - python
         # We need all host deps also in build for cross-compiling
-        - libgz-math7  # [build_platform != target_platform]
+        - libgz-math8  # [build_platform != target_platform]
         - libgz-tools2  # [build_platform != target_platform]
         - tinyxml2  # [build_platform != target_platform]
         - libabseil  # [build_platform != target_platform]
         - libprotobuf  # [build_platform != target_platform]
       host:
-        - libgz-math7
+        - libgz-math8
         - libgz-tools2
         - tinyxml2
         - libabseil
@@ -102,7 +104,7 @@ outputs:
       requires:
         - pip
       imports:
-        - gz.msgs10
+        - gz.msgs11
 
   - name: {{ name }}
     build:
@@ -125,7 +127,7 @@ outputs:
       requires:
         - pip
       imports:
-        - gz.msgs10
+        - gz.msgs11
 
 about:
   home: https://github.com/gazebosim/{{ repo_name }}
