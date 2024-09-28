@@ -1,6 +1,6 @@
 {% set component_name = "msgs" %}
 {% set repo_name = "gz-" + component_name %}
-{% set version = "10.3.0" %}
+{% set version = "11.0.0" %}
 {% set major_version = version.split('.')[0] %}
 {% set name = repo_name + major_version %}
 {% set component_version = component_name + major_version %}
@@ -14,12 +14,12 @@ package:
 
 source:
   - url: https://github.com/gazebosim/{{ repo_name }}/archive/{{ repo_name }}{{ major_version }}_{{ version }}.tar.gz
-    sha256: a93a59379b1179b22a2995a3888daf18486f945565170fd97446d6a58b543b25
+    sha256: c7ce37fc78985b72afaef73fca0a64fb144a0aa5f0df099355da51c2cd6350a4
     patches:
       - win_enable_py_tests.patch
 
 build:
-  number: 1
+  number: 0
 
 outputs:
   - name: {{ cxx_name }}
@@ -38,13 +38,15 @@ outputs:
         - pkg-config
         - python
         # We need all host deps also in build for cross-compiling
-        - libgz-math7  # [build_platform != target_platform]
+        - libgz-cmake4  # [build_platform != target_platform]
+        - libgz-math8  # [build_platform != target_platform]
         - libgz-tools2  # [build_platform != target_platform]
         - tinyxml2  # [build_platform != target_platform]
         - libabseil  # [build_platform != target_platform]
         - libprotobuf  # [build_platform != target_platform]
       host:
-        - libgz-math7
+        - libgz-cmake4
+        - libgz-math8
         - libgz-tools2
         - tinyxml2
         - libabseil
@@ -78,13 +80,13 @@ outputs:
         - pkg-config
         - python
         # We need all host deps also in build for cross-compiling
-        - libgz-math7  # [build_platform != target_platform]
+        - libgz-math8  # [build_platform != target_platform]
         - libgz-tools2  # [build_platform != target_platform]
         - tinyxml2  # [build_platform != target_platform]
         - libabseil  # [build_platform != target_platform]
         - libprotobuf  # [build_platform != target_platform]
       host:
-        - libgz-math7
+        - libgz-math8
         - libgz-tools2
         - tinyxml2
         - libabseil
@@ -102,7 +104,7 @@ outputs:
       requires:
         - pip
       imports:
-        - gz.msgs10
+        - gz.msgs11
 
   - name: {{ name }}
     build:
@@ -125,7 +127,7 @@ outputs:
       requires:
         - pip
       imports:
-        - gz.msgs10
+        - gz.msgs11
 
 about:
   home: https://github.com/gazebosim/{{ repo_name }}
