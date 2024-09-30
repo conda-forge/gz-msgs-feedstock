@@ -8,30 +8,30 @@ jobs:
     vmImage: ubuntu-latest
   strategy:
     matrix:
-      linux_64_libabseil20240116libprotobuf4.25.3:
-        CONFIG: linux_64_libabseil20240116libprotobuf4.25.3
+      linux_64_PROTOBUF_MAJOR_VERSION4libabseil20240116libprotobuf4.25.3:
+        CONFIG: linux_64_PROTOBUF_MAJOR_VERSION4libabseil20240116libprotobuf4.25.3
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      linux_64_libabseil20240722libprotobuf5.27.5:
-        CONFIG: linux_64_libabseil20240722libprotobuf5.27.5
+      linux_64_PROTOBUF_MAJOR_VERSION5libabseil20240722libprotobuf5.27.5:
+        CONFIG: linux_64_PROTOBUF_MAJOR_VERSION5libabseil20240722libprotobuf5.27.5
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
       linux_aarch64_libabseil20240116libprotobuf4.25.3:
         CONFIG: linux_aarch64_libabseil20240116libprotobuf4.25.3
         UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-aarch64
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
       linux_aarch64_libabseil20240722libprotobuf5.27.5:
         CONFIG: linux_aarch64_libabseil20240722libprotobuf5.27.5
         UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-aarch64
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
       linux_ppc64le_libabseil20240116libprotobuf4.25.3:
         CONFIG: linux_ppc64le_libabseil20240116libprotobuf4.25.3
         UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-ppc64le
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
       linux_ppc64le_libabseil20240722libprotobuf5.27.5:
         CONFIG: linux_ppc64le_libabseil20240722libprotobuf5.27.5
         UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-ppc64le
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
   timeoutInMinutes: 360
   variables: {}
 
