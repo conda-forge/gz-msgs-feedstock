@@ -27,17 +27,17 @@ Current build status
         <table>
           <thead><tr><th>Variant</th><th>Status</th></tr></thead>
           <tbody><tr>
-              <td>linux_64_libabseil20240116libprotobuf4.25.3</td>
+              <td>linux_64_PROTOBUF_MAJOR_VERSION4libabseil20240116libprotobuf4.25.3</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=17574&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/gz-msgs-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_libabseil20240116libprotobuf4.25.3" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/gz-msgs-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_PROTOBUF_MAJOR_VERSION4libabseil20240116libprotobuf4.25.3" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_64_libabseil20240722libprotobuf5.27.5</td>
+              <td>linux_64_PROTOBUF_MAJOR_VERSION5libabseil20240722libprotobuf5.27.5</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=17574&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/gz-msgs-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_libabseil20240722libprotobuf5.27.5" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/gz-msgs-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_PROTOBUF_MAJOR_VERSION5libabseil20240722libprotobuf5.27.5" alt="variant">
                 </a>
               </td>
             </tr><tr>

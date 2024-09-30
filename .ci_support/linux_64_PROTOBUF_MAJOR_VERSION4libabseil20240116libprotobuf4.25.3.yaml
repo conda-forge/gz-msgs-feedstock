@@ -1,3 +1,5 @@
+PROTOBUF_MAJOR_VERSION:
+- '4'
 c_compiler:
 - gcc
 c_compiler_version:
@@ -19,9 +21,9 @@ cxx_compiler_version:
 docker_image:
 - quay.io/condaforge/linux-anvil-cos7-x86_64
 libabseil:
-- '20240722'
+- '20240116'
 libprotobuf:
-- 5.27.5
+- 4.25.3
 pin_run_as_build:
   python:
     min_pin: x.x
@@ -39,3 +41,4 @@ zip_keys:
   - cdt_name
 - - libabseil
   - libprotobuf
+  - PROTOBUF_MAJOR_VERSION

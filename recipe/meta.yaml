@@ -19,7 +19,7 @@ source:
       - win_enable_py_tests.patch
 
 build:
-  number: 1
+  number: 2
 
 outputs:
   - name: {{ cxx_name }}
@@ -68,6 +68,7 @@ outputs:
   - name: {{ python_name }}
     build:
       noarch: python
+      string: protobuf{{ PROTOBUF_MAJOR_VERSION }}h{{ PKG_HASH }}_{{ PKG_BUILDNUM }}
     script: build_py.sh  # [unix]
     script: bld_py.bat  # [win]
     requirements:
@@ -97,7 +98,9 @@ outputs:
         - dlfcn-win32  # [win]
       run:
         - python  >=3.8
-        - protobuf
+        # We need to ensure that at runtime we use the same major protobuf
+        # version that was used to generate the python messages
+        - protobuf {{ PROTOBUF_MAJOR_VERSION }}.*
     test:
       commands:
         - pip check
@@ -111,6 +114,10 @@ outputs:
       run_exports:
         - {{ pin_subpackage(cxx_name, max_pin='x') }}
     requirements:
+      host:
+        # Manually ensure that libabseil and libprotobuf end up in the hash
+        - libabseil
+        - libprotobuf
       run:
         - {{ pin_subpackage(cxx_name, exact=True) }}
         - {{ pin_subpackage(python_name, max_pin='x.x.x') }}

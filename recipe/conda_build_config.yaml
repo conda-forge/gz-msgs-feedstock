@@ -12,6 +12,7 @@ zip_keys:
     - libabseil
     - libgrpc
     - libprotobuf
+    - PROTOBUF_MAJOR_VERSION
 python:
   # part of a zip_keys: python, python_impl, numpy
   - 3.11.* *_cpython
@@ -22,14 +23,17 @@ numpy:
   # part of a zip_keys: python, python_impl, numpy
   - 1.23
 libabseil:
-  # part of a zip_keys: libabseil, libgrpc, libprotobuf
+  # part of a zip_keys: libabseil, libgrpc, libprotobuf, PROTOBUF_MAJOR_VERSION
   - '20240116'
   - '20240722'
 libgrpc:
-  # part of a zip_keys: libabseil, libgrpc, libprotobuf
+  # part of a zip_keys: libabseil, libgrpc, libprotobuf, PROTOBUF_MAJOR_VERSION
   - "1.62"
   - "1.65"
 libprotobuf:
-  # part of a zip_keys: libabseil, libgrpc, libprotobuf
+  # part of a zip_keys: libabseil, libgrpc, libprotobuf, PROTOBUF_MAJOR_VERSION
   - 4.25.3
   - 5.27.5
+PROTOBUF_MAJOR_VERSION:
+  - 4
+  - 5
