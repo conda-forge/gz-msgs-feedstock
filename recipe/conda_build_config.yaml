@@ -1,18 +1,11 @@
 # Hardcode python version to avoid have one build job
 # for python version as in the end the generated
 # artifacts do not depend on Python version
-# Hardcode double protobuf pinning as a workaround for https://github.com/conda-forge/gz-common-feedstock/issues/48
-# remove once https://github.com/conda-forge/openvino-feedstock/pull/106 is merged
 zip_keys:
   -
     - python
     - numpy
     - python_impl
-  -
-    - libabseil
-    - libgrpc
-    - libprotobuf
-    - PROTOBUF_MAJOR_VERSION
 python:
   # part of a zip_keys: python, python_impl, numpy
   - 3.11.* *_cpython
@@ -22,18 +15,3 @@ python_impl:
 numpy:
   # part of a zip_keys: python, python_impl, numpy
   - 1.23
-libabseil:
-  # part of a zip_keys: libabseil, libgrpc, libprotobuf, PROTOBUF_MAJOR_VERSION
-  - '20240116'
-  - '20240722'
-libgrpc:
-  # part of a zip_keys: libabseil, libgrpc, libprotobuf, PROTOBUF_MAJOR_VERSION
-  - "1.62"
-  - "1.65"
-libprotobuf:
-  # part of a zip_keys: libabseil, libgrpc, libprotobuf, PROTOBUF_MAJOR_VERSION
-  - 4.25.3
-  - 5.27.5
-PROTOBUF_MAJOR_VERSION:
-  - 4
-  - 5
