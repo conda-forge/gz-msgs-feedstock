@@ -22,6 +22,3 @@ target_platform:
 - win-64
 tinyxml2:
 - '10'
-zip_keys:
-- - libabseil
-  - libprotobuf

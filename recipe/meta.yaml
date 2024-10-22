@@ -6,6 +6,7 @@
 {% set component_version = component_name + major_version %}
 {% set cxx_name = "lib" + name %}
 {% set python_name = name + "-python" %}
+{% set protobuf_major_version = "5" %}
 
 
 package:
@@ -19,7 +20,7 @@ source:
       - win_enable_py_tests.patch
 
 build:
-  number: 0
+  number: 2
 
 outputs:
   - name: {{ cxx_name }}
@@ -68,7 +69,7 @@ outputs:
   - name: {{ python_name }}
     build:
       noarch: python
-      string: protobuf{{ PROTOBUF_MAJOR_VERSION }}h{{ PKG_HASH }}_{{ PKG_BUILDNUM }}
+      string: protobuf{{ protobuf_major_version }}h{{ PKG_HASH }}_{{ PKG_BUILDNUM }}
     script: build_py.sh  # [unix]
     script: bld_py.bat  # [win]
     requirements:
@@ -93,14 +94,14 @@ outputs:
         - libabseil
         - libprotobuf
         - python
-        - protobuf
+        - protobuf {{ protobuf_major_version }}.*
         - pytest
         - dlfcn-win32  # [win]
       run:
         - python  >=3.8
         # We need to ensure that at runtime we use the same major protobuf
         # version that was used to generate the python messages
-        - protobuf {{ PROTOBUF_MAJOR_VERSION }}.*
+        - protobuf {{ protobuf_major_version }}.*
     test:
       commands:
         - pip check
