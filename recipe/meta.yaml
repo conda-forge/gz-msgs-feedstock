@@ -6,7 +6,11 @@
 {% set component_version = component_name + major_version %}
 {% set cxx_name = "lib" + name %}
 {% set python_name = name + "-python" %}
-{% set protobuf_major_version = "5" %}
+{% set protobuf_version = "5.28.2"}
+{% set protobuf_major_version = protobuf_version.split('.')[0] %}
+{% set next_protobuf_major_version = "6"}
+
+
 
 
 package:
@@ -20,7 +24,7 @@ source:
       - win_enable_py_tests.patch
 
 build:
-  number: 3
+  number: 4
 
 outputs:
   - name: {{ cxx_name }}
@@ -94,14 +98,13 @@ outputs:
         - libabseil
         - libprotobuf
         - python
-        - protobuf {{ protobuf_major_version }}.*
+        - protobuf {{ protobuf_version }}
         - pytest
         - dlfcn-win32  # [win]
       run:
         - python  >=3.8
-        # We need to ensure that at runtime we use the same major protobuf
-        # version that was used to generate the python messages
-        - protobuf {{ protobuf_major_version }}.*
+        # See https://protobuf.dev/support/cross-version-runtime-guarantee/
+        - protobuf >={{ protobuf_version }},<{{ next_protobuf_major_version }}.0a0
     test:
       commands:
         - pip check
