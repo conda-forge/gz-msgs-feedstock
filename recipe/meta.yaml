@@ -101,9 +101,6 @@ outputs:
         - pip check
       requires:
         - pip
-        - python
-        - pytest
-        - zlib
         
       imports:
         - gz.msgs10
@@ -113,6 +110,15 @@ outputs:
       run_exports:
         - {{ pin_subpackage(cxx_name, max_pin='x') }}
     requirements:
+      build:
+        - {{ compiler('cxx') }}
+        - {{ compiler('c') }}
+        - {{ stdlib('c') }}
+        - python
+      host:
+        - python
+        - pytest
+        - zlib
       run:
         - {{ pin_subpackage(cxx_name, exact=True) }}
         - {{ pin_subpackage(python_name, max_pin='x.x.x') }}
