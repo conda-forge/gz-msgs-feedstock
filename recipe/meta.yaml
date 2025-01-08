@@ -17,6 +17,7 @@ source:
     sha256: a93a59379b1179b22a2995a3888daf18486f945565170fd97446d6a58b543b25
     patches:
       - win_enable_py_tests.patch
+      - link_tinyxml2_public.patch
 
 build:
   number: 4
