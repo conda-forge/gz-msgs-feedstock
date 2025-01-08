@@ -1,0 +1,13 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 141636f4..5753f3bd 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -109,7 +109,7 @@ set(GZ_TOOLS_VER 2)
+ 
+ #--------------------------------------
+ # Find Tinyxml2
+-gz_find_package(TINYXML2 REQUIRED PRIVATE PRETTY tinyxml2)
++gz_find_package(TINYXML2 REQUIRED PRETTY tinyxml2)
+ 
+ #--------------------------------------
+ # Find DL if doing relocatable installation
