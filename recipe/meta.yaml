@@ -21,7 +21,7 @@ source:
       - win_enable_py_tests.patch
 
 build:
-  number: 5
+  number: 6
 
 outputs:
   - name: {{ cxx_name }}
@@ -94,12 +94,12 @@ outputs:
         - tinyxml2
         - libabseil
         - libprotobuf
-        - python
+        - python {{ python_min }}
         - protobuf {{ protobuf_version }}
         - pytest
         - dlfcn-win32  # [win]
       run:
-        - python  >=3.8
+        - python >={{ python_min }}
         # See https://protobuf.dev/support/cross-version-runtime-guarantee/
         - protobuf >={{ protobuf_version }},<{{ next_protobuf_major_version }}.0a0
     test:
@@ -107,6 +107,7 @@ outputs:
         - pip check
       requires:
         - pip
+        - python {{ python_min }}
       imports:
         - gz.msgs11
 
