@@ -6,11 +6,14 @@ zip_keys:
     - python
     - numpy
     - python_impl
+    - is_python_min
 python:
-  # part of a zip_keys: python, python_impl, numpy
+  # part of a zip_keys: python, python_impl, numpy, is_python_min
   - 3.11.* *_cpython
 python_impl:
-  # part of a zip_keys: python, python_impl, numpy
+  # part of a zip_keys: python, python_impl, numpy, is_python_min
   - cpython
 numpy:
   - 1.23
+is_python_min:
+  - 'false'
