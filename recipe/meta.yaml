@@ -20,7 +20,7 @@ source:
       - link_tinyxml2_public.patch
 
 build:
-  number: 5
+  number: 6
 
 outputs:
   - name: {{ cxx_name }}
@@ -37,7 +37,7 @@ outputs:
         - ninja
         - cmake
         - pkg-config
-        - python
+        - python {{ python_min }}
         # We need all host deps also in build for cross-compiling
         - libgz-math7  # [build_platform != target_platform]
         - libgz-tools2  # [build_platform != target_platform]
@@ -77,7 +77,7 @@ outputs:
         - ninja
         - cmake
         - pkg-config
-        - python
+        - python {{ python_min }}
         # We need all host deps also in build for cross-compiling
         - libgz-math7  # [build_platform != target_platform]
         - libgz-tools2  # [build_platform != target_platform]
@@ -90,12 +90,12 @@ outputs:
         - tinyxml2
         - libabseil
         - libprotobuf
-        - python
+        - python {{ python_min }}
         - protobuf
         - pytest
         - dlfcn-win32  # [win]
       run:
-        - python  >=3.8
+        - python >={{ python_min }}
         - protobuf
     test:
       commands:
@@ -125,6 +125,7 @@ outputs:
         - if not exist %PREFIX%\\Library\\lib\\cmake\\{{ name }}\\{{ name }}-config.cmake exit 1  # [win]
       requires:
         - pip
+        - python {{ python_min }}
       imports:
         - gz.msgs10
 
