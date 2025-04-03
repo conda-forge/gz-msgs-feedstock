@@ -125,6 +125,7 @@ outputs:
         - if not exist %PREFIX%\\Library\\lib\\cmake\\{{ name }}\\{{ name }}-config.cmake exit 1  # [win]
       requires:
         - pip
+        - python {{ python_min }}
       imports:
         - gz.msgs10
 
