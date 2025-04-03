@@ -18,6 +18,8 @@ cxx_compiler_version:
 - '13'
 docker_image:
 - quay.io/condaforge/linux-anvil-x86_64:alma9
+is_python_min:
+- 'true'
 libabseil:
 - '20240722'
 libprotobuf:
@@ -27,13 +29,15 @@ pin_run_as_build:
     min_pin: x.x
     max_pin: x.x
 python:
-- 3.11.* *_cpython
+- 3.9.* *_cpython
 python_min:
 - '3.9'
 target_platform:
-- linux-aarch64
+- linux-64
 tinyxml2:
 - '10.0'
 zip_keys:
 - - c_compiler_version
   - cxx_compiler_version
+- - python
+  - is_python_min
