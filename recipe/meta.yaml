@@ -49,6 +49,7 @@ outputs:
         - libprotobuf  # [build_platform != target_platform]
       host:
         - libgz-cmake4
+        - libgz-utils3
         - libgz-math8
         - libgz-tools2
         - tinyxml2
