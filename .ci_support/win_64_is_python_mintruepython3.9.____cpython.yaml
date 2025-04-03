@@ -25,7 +25,7 @@ python_min:
 target_platform:
 - win-64
 tinyxml2:
-- '10.0'
+- '11.0'
 zip_keys:
 - - python
   - is_python_min
