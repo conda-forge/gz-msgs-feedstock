@@ -38,7 +38,7 @@ outputs:
         - ninja
         - cmake
         - pkg-config
-        - python
+        - python {{ python_min }}
         # We need all host deps also in build for cross-compiling
         - libgz-cmake4  # [build_platform != target_platform]
         - libgz-math8  # [build_platform != target_platform]
@@ -81,7 +81,7 @@ outputs:
         - ninja
         - cmake
         - pkg-config
-        - python
+        - python {{ python_min }}
         # We need all host deps also in build for cross-compiling
         - libgz-math8  # [build_platform != target_platform]
         - libgz-tools2  # [build_platform != target_platform]
@@ -94,12 +94,12 @@ outputs:
         - tinyxml2
         - libabseil
         - libprotobuf
-        - python
+        - python {{ python_min }}
         - protobuf {{ protobuf_version }}
         - pytest
         - dlfcn-win32  # [win]
       run:
-        - python  >=3.8
+        - python  >={{ python_min }}
         # See https://protobuf.dev/support/cross-version-runtime-guarantee/
         - protobuf >={{ protobuf_version }},<{{ next_protobuf_major_version }}.0a0
     test:
