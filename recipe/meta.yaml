@@ -18,7 +18,7 @@ source:
       - fixprotobuf23.patch
 
 build:
-  number: 12
+  number: 13
 
 outputs:
   - name: {{ cxx_name }}
