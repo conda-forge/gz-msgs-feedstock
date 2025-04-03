@@ -107,6 +107,7 @@ outputs:
       commands:
         - pip check
       requires:
+        - python {{ python_min }}
         - pip
       imports:
         - gz.msgs11
