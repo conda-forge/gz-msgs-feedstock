@@ -21,9 +21,9 @@ cxx_compiler_version:
 is_python_min:
 - 'true'
 libabseil:
-- '20240722'
+- '20250127'
 libprotobuf:
-- 5.28.3
+- 5.29.3
 macos_machine:
 - arm64-apple-darwin20.0.0
 pin_run_as_build:
