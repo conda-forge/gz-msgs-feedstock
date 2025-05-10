@@ -9,7 +9,7 @@ channel_targets:
 cxx_compiler:
 - vs2019
 is_python_min:
-- 'true'
+- true
 libabseil:
 - '20250127'
 libprotobuf:
