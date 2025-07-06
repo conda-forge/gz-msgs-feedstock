@@ -20,7 +20,7 @@ source:
       - link_tinyxml2_public.patch
 
 build:
-  number: 6
+  number: 7
 
 outputs:
   - name: {{ cxx_name }}
