@@ -6,9 +6,9 @@
 {% set component_version = component_name + major_version %}
 {% set cxx_name = "lib" + name %}
 {% set python_name = name + "-python" %}
-{% set protobuf_version = "5.29.3" %}
+{% set protobuf_version = "6.31.1" %}
 {% set protobuf_major_version = protobuf_version.split('.')[0] %}
-{% set next_protobuf_major_version = "6" %}
+{% set next_protobuf_major_version = "7" %}
 
 package:
   name: {{ name }}
