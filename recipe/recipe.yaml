@@ -24,8 +24,6 @@ source:
 
 build:
   number: 7
-  skip:
-    - not is_python_min
 
 outputs:
   - package:
@@ -44,7 +42,7 @@ outputs:
         - ninja
         - cmake
         - pkg-config
-        - python
+        - python ${{ python_min }}.*
         # Cross-compiling dependencies
         - if: build_platform != target_platform
           then:
@@ -54,6 +52,7 @@ outputs:
             - libabseil
             - libprotobuf
       host:
+        - python ${{ python_min }}.*
         - libgz-math7
         - libgz-tools2
         - tinyxml2
