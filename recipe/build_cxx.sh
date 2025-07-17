@@ -33,17 +33,16 @@ mkdir build_cxx
 cd build_cxx
 
 if [[ "${CONDA_BUILD_CROSS_COMPILATION}" == "1" ]]; then
-  export CMAKE_ARGS="${CMAKE_ARGS} -Dgz-msgs11_PYTHON_INTERPRETER=$BUILD_PREFIX/bin/python -Dgz-msgs11_PROTOC_EXECUTABLE=$BUILD_PREFIX/bin/protoc -Dgz-msgs11_PROTO_GENERATOR_PLUGIN=$BUILD_PREFIX/bin/gz-msgs11_protoc_plugin"
+  export CMAKE_ARGS="${CMAKE_ARGS} -Dgz-msgs11_PYTHON_INTERPRETER=$BUILD_PREFIX/bin/python -Dgz-msgs11_PROTOC_EXECUTABLE=$BUILD_PREFIX/bin/protoc -Dgz-msgs11_PROTO_GENERATOR_PLUGIN=$BUILD_PREFIX/bin/gz-msgs11_protoc_plugin -DPython3_EXECUTABLE:PATH=$BUILD_PREFIX/bin/python -DPYTHON_EXECUTABLE:PATH=$BUILD_PREFIX/bin/python"
+else
+  export CMAKE_ARGS="-DPython3_EXECUTABLE:PATH=$PYTHON -DPYTHON_EXECUTABLE:PATH=$PYTHON"
 fi
-
 # Set Python install dir to wrong directory to ensure Python files
 # are not included in the libgz-msgs<major> package
 cmake ${CMAKE_ARGS} -DBUILD_TESTING:BOOL=ON -GNinja .. \
       -DCMAKE_BUILD_TYPE=Release \
       -DCMAKE_INSTALL_SYSTEM_RUNTIME_LIBS_SKIP:BOOL=ON \
       -DGZ_PYTHON_INSTALL_PATH=$SRC_DIR/wrong_py_install \
-      -DPython3_EXECUTABLE:PATH=$PYTHON \
-      -DPYTHON_EXECUTABLE:PATH=$PYTHON \
       -DGZ_ENABLE_RELOCATABLE_INSTALL:BOOL=ON \
       -DPython3_INCLUDE_DIR:PATH=$PREFIX/include/`ls $PREFIX/include | grep "python\|pypy"`
 
