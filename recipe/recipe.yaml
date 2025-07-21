@@ -10,6 +10,7 @@ context:
   protobuf_version: "5.29.3"
   protobuf_major_version: "5"
   next_protobuf_major_version: "6"
+  build_number: "8"
 
 recipe:
   name: ${{ name }}
@@ -23,7 +24,7 @@ source:
       - link_tinyxml2_public.patch
 
 build:
-  number: 8
+  number: ${{ build_number }}
 
 outputs:
   - package:
@@ -84,7 +85,7 @@ outputs:
       name: ${{ python_name }}
     build:
       noarch: python
-      string: protobuf${{ protobuf_major_version }}h${{ hash }}_${{ number }}
+      string: protobuf${{ protobuf_major_version }}h${{ hash }}_${{ build_number }}
       script:
         - if: unix
           then: build_py.sh
