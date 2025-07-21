@@ -1,0 +1,177 @@
+context:
+  version: "11.1.0"
+  major_version: "11"
+  component_name: "msgs"
+  component_version: "msgs11"
+  repo_name: "gz-msgs"
+  name: "gz-msgs11"
+  cxx_name: "libgz-msgs11"
+  python_name: "gz-msgs11-python"
+  protobuf_version: "5.29.3"
+  protobuf_major_version: "5"
+  next_protobuf_major_version: "6"
+
+recipe:
+  name: ${{ name }}
+  version: ${{ version }}
+
+source:
+  - url: "https://github.com/gazebosim/${{ repo_name }}/archive/${{ repo_name }}${{ major_version }}_${{ version }}.tar.gz"
+    sha256: "1eaa47500aa8a6fa65bcf76cf8d03c78d298e6da730ee2371b119dff732b639d"
+    patches:
+      - win_enable_py_tests.patch
+
+build:
+  number: 1
+
+outputs:
+  - package:
+      name: ${{ cxx_name }}
+    build:
+      script:
+        - if: unix
+          then: build_cxx.sh
+        - if: win
+          then: bld_cxx.bat
+    requirements:
+      build:
+        - ${{ compiler('cxx') }}
+        - ${{ compiler('c') }}
+        - ${{ stdlib('c') }}
+        - ninja
+        - cmake
+        - pkg-config
+        - python ${{ python_min }}.*
+        # Cross-compiling dependencies
+        - if: build_platform != target_platform
+          then:
+            - libgz-cmake4
+            - libgz-math8
+            - libgz-tools2
+            - tinyxml2
+            - libabseil
+            - libprotobuf
+      host:
+        - python ${{ python_min }}.*
+        - libgz-cmake4
+        - libgz-utils3
+        - libgz-math8
+        - libgz-tools2
+        - tinyxml2
+        - libabseil
+        - libprotobuf
+        - if: win
+          then:
+            - dlfcn-win32
+      run:
+        - python
+      run_exports:
+        - ${{ pin_subpackage(cxx_name, upper_bound='x') }}
+  
+    tests:
+      - script:
+        - if: not win
+          then: 
+            - test -f ${PREFIX}/include/gz/${{ component_version }}/gz/${{ component_name }}.hh
+            - test -f ${PREFIX}/lib/lib${{ name }}${SHLIB_EXT}
+            - test -f ${PREFIX}/lib/cmake/${{ name }}/${{ name }}-config.cmake
+        - if: win
+          then: 
+            - if not exist %PREFIX%\\Library\\include\\gz\\${{ component_version }}\\gz\\${{ component_name }}.hh exit 1
+            - if not exist %PREFIX%\\Library\\lib\\${{ name }}.lib exit 1
+            - if not exist %PREFIX%\\Library\\bin\\${{ name }}.dll exit 1
+            - if not exist %PREFIX%\\Library\\lib\\cmake\\${{ name }}\\${{ name }}-config.cmake exit 1
+
+  - package:
+      name: ${{ python_name }}
+    build:
+      noarch: python
+      string: protobuf${{ protobuf_major_version }}h${{ PKG_HASH }}_${{ PKG_BUILDNUM }}
+      script:
+        - if: unix
+          then: build_py.sh
+        - if: win
+          then: bld_py.bat
+    requirements:
+      build:
+        - ${{ compiler('cxx') }}
+        - ${{ compiler('c') }}
+        - ${{ stdlib('c') }}
+        - ninja
+        - cmake
+        - pkg-config
+        - python
+        # Cross-compiling dependencies
+        - if: build_platform != target_platform
+          then:
+            - libgz-math8
+            - libgz-tools2
+            - tinyxml2
+            - libabseil
+            - libprotobuf
+      host:
+        - libgz-math8
+        - libgz-tools2
+        - tinyxml2
+        - libabseil
+        - libprotobuf
+        - python ${{ python_min }}.*
+        - protobuf ${{ protobuf_version }}.*
+        - pytest
+        - if: win
+          then:
+            - dlfcn-win32
+      run:
+        - python >=${{ python_min }}
+        # See https://protobuf.dev/support/cross-version-runtime-guarantee/
+        - protobuf >=${{ protobuf_version }},<${{ next_protobuf_major_version }}.0a0
+
+    tests:
+      - python:
+          imports:
+            - gz.msgs11
+          python_version: ${{ python_min }}.*
+
+  - package:
+      name: ${{ name }}
+    requirements:
+      host:
+        # Manually ensure that libabseil and libprotobuf end up in the hash
+        - libabseil
+        - libprotobuf
+      run:
+        - ${{ pin_subpackage(cxx_name, exact=true) }}
+        - ${{ pin_subpackage(python_name, upper_bound='x.x.x') }}
+      run_exports:
+        - ${{ pin_subpackage(cxx_name, upper_bound='x') }}
+    
+    tests:
+      - script:
+        - if: not win
+          then: 
+            - test -f ${PREFIX}/include/gz/${{ component_version }}/gz/${{ component_name }}.hh
+            - test -f ${PREFIX}/lib/lib${{ name }}${SHLIB_EXT}
+            - test -f ${PREFIX}/lib/cmake/${{ name }}/${{ name }}-config.cmake
+        - if: win
+          then: 
+            - if not exist %PREFIX%\\Library\\include\\gz\\${{ component_version }}\\gz\\${{ component_name }}.hh exit 1
+            - if not exist %PREFIX%\\Library\\lib\\${{ name }}.lib exit 1
+            - if not exist %PREFIX%\\Library\\bin\\${{ name }}.dll exit 1
+            - if not exist %PREFIX%\\Library\\lib\\cmake\\${{ name }}\\${{ name }}-config.cmake exit 1
+      - python:
+          imports:
+            - gz.msgs11
+
+about:
+  homepage: https://github.com/gazebosim/${{ repo_name }}
+  repository: https://github.com/gazebosim/${{ repo_name }}
+  license: "Apache-2.0"
+  license_file: "LICENSE"
+  summary: "Messages for Gazebo robot simulation."
+
+extra:
+  recipe-maintainers:
+    - wolfv
+    - traversaro
+    - j-rivero
+    - Tobias-Fischer
