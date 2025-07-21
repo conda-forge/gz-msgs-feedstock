@@ -84,7 +84,7 @@ outputs:
       name: ${{ python_name }}
     build:
       noarch: python
-      string: protobuf${{ protobuf_major_version }}h${{ PKG_HASH }}_${{ PKG_BUILDNUM }}
+      string: protobuf${{ protobuf_major_version }}h${{ env.get(PKG_HASH) }}_${{ env.get(PKG_BUILDNUM) }}
       script:
         - if: unix
           then: build_py.sh
