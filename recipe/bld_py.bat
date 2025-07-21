@@ -6,6 +6,7 @@ cd build_py
 cmake ^
     -G "Ninja" ^
     -DCMAKE_INSTALL_PREFIX=%SRC_DIR%\wrong_cxx_install ^
+    -DCMAKE_PREFIX_PATH=%LIBRARY_PREFIX% ^
     -DCMAKE_BUILD_TYPE=Release ^
     -DCMAKE_INSTALL_SYSTEM_RUNTIME_LIBS_SKIP=ON ^
     -DGZ_PYTHON_INSTALL_PATH=%SP_DIR% ^
