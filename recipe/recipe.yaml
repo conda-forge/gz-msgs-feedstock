@@ -23,7 +23,7 @@ source:
       - link_tinyxml2_public.patch
 
 build:
-  number: 7
+  number: 8
 
 outputs:
   - package:
