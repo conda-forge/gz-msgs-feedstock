@@ -43,7 +43,7 @@ mkdir build_py
 cd build_py
 
 if [[ "${host_platform}" != "${build_platform}" ]]; then
-  export CMAKE_ARGS_FOR_PY_BUILD="-Dgz-msgs11_PYTHON_INTERPRETER=$BUILD_PREFIX/bin/python -Dgz-msgs11_PROTOC_EXECUTABLE=$BUILD_PREFIX/bin/protoc -Dgz-msgs11_PROTO_GENERATOR_PLUGIN=$BUILD_PREFIX/bin/gz-msgs11_protoc_plugin -DPython3_EXECUTABLE:PATH=$BUILD_PREFIX/bin/python -DPYTHON_EXECUTABLE:PATH=$BUILD_PREFIX/bin/python"
+  export CMAKE_ARGS_FOR_PY_BUILD="-Dgz-msgs11_PYTHON_INTERPRETER=$BUILD_PREFIX/bin/python -Dgz-msgs10_PROTOC_EXECUTABLE=$BUILD_PREFIX/bin/protoc -Dgz-msgs10_PROTO_GENERATOR_PLUGIN=$BUILD_PREFIX/bin/gz-msgs10_protoc_plugin -DPython3_EXECUTABLE:PATH=$BUILD_PREFIX/bin/python -DPYTHON_EXECUTABLE:PATH=$BUILD_PREFIX/bin/python"
 else
   export CMAKE_ARGS_FOR_PY_BUILD="-DPython3_EXECUTABLE:PATH=$PYTHON -DPYTHON_EXECUTABLE:PATH=$PYTHON"
 fi
