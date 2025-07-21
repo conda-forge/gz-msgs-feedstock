@@ -1,11 +1,21 @@
 #!/bin/sh
 
-if [[ "${target_platform}" == osx-* ]]; then
+# on conda-build target_platform is the same of host_platform, in rattler-build target_platform is noarch,
+# so let's use host_platform here
+if [[ "${host_platform}" == osx-* ]]; then
     # See https://conda-forge.org/docs/maintainer/knowledge_base.html#newer-c-features-with-old-sdk
-    CXXFLAGS="${CXXFLAGS} -D_LIBCPP_DISABLE_AVAILABILITY"
+    export CXXFLAGS="${CXXFLAGS} -D_LIBCPP_DISABLE_AVAILABILITY"
 fi
 
-if [[ "$CONDA_BUILD_CROSS_COMPILATION" == 1 ]]; then
+if [[ "${host_platform}" == osx-arm64 ]]; then
+    # workaround for https://github.com/prefix-dev/rattler-build/issues/1784#issuecomment-3089643907
+    activate_clang
+    activate_clangxx
+fi
+
+# We can't use CONDA_BUILD_CROSS_COMPILATION in noarch: python recipes due to https://github.com/prefix-dev/rattler-build/issues/1784,
+# let's just compare build_platform and host_platform
+if [[ "${host_platform}" != "${build_platform}" ]]; then
   (
     mkdir -p build_py_host
     pushd build_py_host
@@ -32,14 +42,11 @@ fi
 mkdir build_py
 cd build_py
 
-if [[ "${CONDA_BUILD_CROSS_COMPILATION}" == "1" ]]; then
-  export CMAKE_ARGS_FOR_PY_BUILD="-Dgz-msgs10_PYTHON_INTERPRETER=$BUILD_PREFIX/bin/python -Dgz-msgs10_PROTOC_EXECUTABLE=$BUILD_PREFIX/bin/protoc -Dgz-msgs10_PROTO_GENERATOR_PLUGIN=$BUILD_PREFIX/bin/gz-msgs10_protoc_plugin -DPython3_EXECUTABLE:PATH=$BUILD_PREFIX/bin/python -DPYTHON_EXECUTABLE:PATH=$BUILD_PREFIX/bin/python"
+if [[ "${host_platform}" != "${build_platform}" ]]; then
+  export CMAKE_ARGS_FOR_PY_BUILD="-Dgz-msgs11_PYTHON_INTERPRETER=$BUILD_PREFIX/bin/python -Dgz-msgs10_PROTOC_EXECUTABLE=$BUILD_PREFIX/bin/protoc -Dgz-msgs10_PROTO_GENERATOR_PLUGIN=$BUILD_PREFIX/bin/gz-msgs10_protoc_plugin -DPython3_EXECUTABLE:PATH=$BUILD_PREFIX/bin/python -DPYTHON_EXECUTABLE:PATH=$BUILD_PREFIX/bin/python"
 else
   export CMAKE_ARGS_FOR_PY_BUILD="-DPython3_EXECUTABLE:PATH=$PYTHON -DPYTHON_EXECUTABLE:PATH=$PYTHON"
 fi
-
-echo "Printing env value ====>"
-env
 
 # Set CMAKE_INSTALL_PREFIX install dir to wrong directory to ensure C++ files
 # are not included in the gz-msgs<major>-python package
@@ -54,7 +61,7 @@ cmake --build . --config Release
 cmake --build . --config Release --target install
 
 export CTEST_OUTPUT_ON_FAILURE=1
-if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" != "1" || "${CROSSCOMPILING_EMULATOR}" != "" ]]; then
+if [[  "${host_platform}" == "${build_platform}" || "${CROSSCOMPILING_EMULATOR}" != "" ]]; then
   cd $SRC_DIR/python/test
   pytest ./basic_TEST.py
 fi
