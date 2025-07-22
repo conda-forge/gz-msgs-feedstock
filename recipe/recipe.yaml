@@ -1,5 +1,5 @@
 context:
-  version: "10.3.0"
+  version: "10.3.2"
   major_version: "10"
   component_name: "msgs"
   component_version: "msgs10"
@@ -10,7 +10,7 @@ context:
   protobuf_version: "6.31.1"
   protobuf_major_version: "6"
   next_protobuf_major_version: "7"
-  build_number: "9"
+  build_number: "0"
 
 recipe:
   name: ${{ name }}
