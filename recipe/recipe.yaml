@@ -1,5 +1,5 @@
 context:
-  version: "10.3.0"
+  version: "10.3.2"
   major_version: "10"
   component_name: "msgs"
   component_version: "msgs10"
@@ -7,10 +7,10 @@ context:
   name: "gz-msgs10"
   cxx_name: "libgz-msgs10"
   python_name: "gz-msgs10-python"
-  protobuf_version: "5.29.3"
-  protobuf_major_version: "5"
-  next_protobuf_major_version: "6"
-  build_number: "8"
+  protobuf_version: "6.31.1"
+  protobuf_major_version: "6"
+  next_protobuf_major_version: "7"
+  build_number: "0"
 
 recipe:
   name: ${{ name }}
@@ -18,10 +18,11 @@ recipe:
 
 source:
   - url: "https://github.com/gazebosim/${{ repo_name }}/archive/${{ repo_name }}${{ major_version }}_${{ version }}.tar.gz"
-    sha256: "a93a59379b1179b22a2995a3888daf18486f945565170fd97446d6a58b543b25"
+    sha256: "ec4cd00b71f4db67c98d441e1b5431388f100d92bfa47046116b20104da5d679"
     patches:
       - win_enable_py_tests.patch
       - link_tinyxml2_public.patch
+      - 501.patch
 
 build:
   number: ${{ build_number }}
