@@ -58,4 +58,5 @@ if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" != "1" || "${CROSSCOMPILING_EMULATOR}
 fi
 
 # Cleanup __pycache__ folders created in $CONDA_PREFIX/bin (conda-build used to do that, but in rattler-build it needs to be manual)
-rm -rf $CONDA_PREFIX/bin/__pycache__
+rm -rf $PREFIX/bin/__pycache__
+
