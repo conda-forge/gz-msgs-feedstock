@@ -29,3 +29,6 @@ if errorlevel 1 exit 1
 del .\bin\gz-msgs10.dll
 ctest --output-on-failure -C Release -E "INTEGRATION_gz_TEST|basic_TEST"
 if errorlevel 1 exit 1
+
+:: Cleanup __pycache__ folders created in $CONDA_PREFIX/bin (conda-build used to do that, but in rattler-build it needs to be manual)
+rmdir /S /Q "%LIBRARY_PREFIX%\bin\__pycache__"
