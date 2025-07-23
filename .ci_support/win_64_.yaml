@@ -9,9 +9,9 @@ channel_targets:
 cxx_compiler:
 - vs2022
 libabseil:
-- '20250512'
+- '20250127'
 libprotobuf:
-- 6.31.1
+- 5.29.3
 python_min:
 - '3.9'
 target_platform:
