@@ -7,10 +7,10 @@ context:
   name: "gz-msgs10"
   cxx_name: "libgz-msgs10"
   python_name: "gz-msgs10-python"
-  protobuf_version: "5.29.3"
-  protobuf_major_version: "5"
-  next_protobuf_major_version: "6"
-  build_number: "1"
+  protobuf_version: "6.31.1"
+  protobuf_major_version: "6"
+  next_protobuf_major_version: "7"
+  build_number: "2"
 
 recipe:
   name: ${{ name }}
