@@ -10,7 +10,7 @@ context:
   protobuf_version: "6.31.1"
   protobuf_major_version: "6"
   next_protobuf_major_version: "7"
-  build_number: "2"
+  build_number: "4"
 
 recipe:
   name: ${{ name }}
@@ -37,6 +37,10 @@ outputs:
         - if: win
           then: bld_cxx.bat
     requirements:
+      ignore_run_exports:
+        by_name:
+          - python
+          - python_abi
       build:
         - ${{ compiler('cxx') }}
         - ${{ compiler('c') }}
