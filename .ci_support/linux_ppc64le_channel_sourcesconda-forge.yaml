@@ -23,9 +23,9 @@ libabseil:
 libprotobuf:
 - 6.31.1
 python_min:
-- '3.9'
+- '3.10'
 target_platform:
-- linux-aarch64
+- linux-ppc64le
 tinyxml2:
 - '11.0'
 zip_keys:

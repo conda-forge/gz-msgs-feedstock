@@ -11,7 +11,7 @@ c_stdlib:
 c_stdlib_version:
 - '11.0'
 channel_sources:
-- conda-forge
+- conda-forge,conda-forge/label/python_rc
 channel_targets:
 - conda-forge main
 cxx_compiler:
@@ -23,11 +23,11 @@ libabseil:
 libprotobuf:
 - 6.31.1
 macos_machine:
-- x86_64-apple-darwin13.4.0
+- arm64-apple-darwin20.0.0
 python_min:
-- '3.9'
+- '3.10'
 target_platform:
-- osx-64
+- osx-arm64
 tinyxml2:
 - '11.0'
 zip_keys:
