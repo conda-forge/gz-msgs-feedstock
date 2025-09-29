@@ -10,7 +10,7 @@ context:
   protobuf_version: "6.31.1"
   protobuf_major_version: "6"
   next_protobuf_major_version: "7"
-  build_number: 1
+  build_number: 2
 
 recipe:
   name: ${{ name }}
@@ -167,6 +167,55 @@ outputs:
       # Failed with Error,  Test failed: Failed to copy test files: FileSystem error: 'Path "/var/folders/vk/nx37ffx50hv5djclhltc26vw0000gn/T/.tmpC44c2n/" already exists!'
       # disabled for now
       # - downstream: gz-transport14-python
+
+
+  # Versionless dummy packages, see https://github.com/conda-forge/gz-sim-feedstock/issues/102
+  - package:
+      name: libgz-${{ component_name}}
+    requirements:
+      run:
+        - ${{ pin_subpackage(cxx_name, exact=true) }}
+      run_exports:
+        - ${{ pin_subpackage(cxx_name, upper_bound='x') }}
+        - ${{ pin_subpackage('libgz-msgs', upper_bound='x') }}
+    tests:
+      - script:
+          - cmake-package-check gz-${{ component_name}}${{ major_version }}
+        requirements:
+          run:
+            - cmake-package-check
+            - ${{ compiler('c') }}
+            - ${{ compiler('cxx') }}
+
+  - package:
+      name: gz-${{ component_name}}-python
+    requirements:
+      run:
+        - ${{ pin_subpackage(python_name, upper_bound='x.x.x') }}
+    tests:
+      - python:
+          imports:
+            - gz.${{ component_name}}${{ major_version }}
+
+  - package:
+      name: gz-${{ component_name}}
+    requirements:
+      run:
+        - ${{ pin_subpackage(name, exact=true) }}
+      run_exports:
+        - ${{ pin_subpackage(cxx_name, upper_bound='x') }}
+        - ${{ pin_subpackage('libgz-msgs', upper_bound='x') }}
+    tests:
+      - script:
+          - cmake-package-check gz-${{ component_name}}${{ major_version }}
+        requirements:
+          run:
+            - cmake-package-check
+            - ${{ compiler('c') }}
+            - ${{ compiler('cxx') }}
+      - python:
+          imports:
+            - gz.${{ component_name}}${{ major_version }}
 
 about:
   homepage: https://github.com/gazebosim/${{ repo_name }}
