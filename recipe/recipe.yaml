@@ -171,7 +171,7 @@ outputs:
 
   # Versionless dummy packages, see https://github.com/conda-forge/gz-sim-feedstock/issues/102
   - package:
-      name: libgz-${{ component_name}}
+      name: libgz-${{ component_name }}
     requirements:
       run:
         - ${{ pin_subpackage(cxx_name, exact=true) }}
@@ -180,7 +180,7 @@ outputs:
         - ${{ pin_subpackage('libgz-msgs', upper_bound='x') }}
     tests:
       - script:
-          - cmake-package-check gz-${{ component_name}}${{ major_version }}
+          - cmake-package-check gz-${{ component_name }}${{ major_version }}
         requirements:
           run:
             - cmake-package-check
@@ -188,17 +188,17 @@ outputs:
             - ${{ compiler('cxx') }}
 
   - package:
-      name: gz-${{ component_name}}-python
+      name: gz-${{ component_name }}-python
     requirements:
       run:
         - ${{ pin_subpackage(python_name, upper_bound='x.x.x') }}
     tests:
       - python:
           imports:
-            - gz.${{ component_name}}${{ major_version }}
+            - gz.${{ component_name }}${{ major_version }}
 
   - package:
-      name: gz-${{ component_name}}
+      name: gz-${{ component_name }}
     requirements:
       run:
         - ${{ pin_subpackage(name, exact=true) }}
@@ -207,7 +207,7 @@ outputs:
         - ${{ pin_subpackage('libgz-msgs', upper_bound='x') }}
     tests:
       - script:
-          - cmake-package-check gz-${{ component_name}}${{ major_version }}
+          - cmake-package-check gz-${{ component_name }}${{ major_version }}
         requirements:
           run:
             - cmake-package-check
@@ -215,7 +215,7 @@ outputs:
             - ${{ compiler('cxx') }}
       - python:
           imports:
-            - gz.${{ component_name}}${{ major_version }}
+            - gz.${{ component_name }}${{ major_version }}
 
 about:
   homepage: https://github.com/gazebosim/${{ repo_name }}
