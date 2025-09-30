@@ -10,6 +10,14 @@ cxx_compiler:
 - vs2022
 libabseil:
 - '20250512'
+libgz_cmake:
+- '5'
+libgz_math:
+- '9'
+libgz_tools:
+- '2'
+libgz_utils:
+- '4'
 libprotobuf:
 - 6.31.1
 python_min:

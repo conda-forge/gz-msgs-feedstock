@@ -20,6 +20,14 @@ cxx_compiler_version:
 - '19'
 libabseil:
 - '20250512'
+libgz_cmake:
+- '5'
+libgz_math:
+- '9'
+libgz_tools:
+- '2'
+libgz_utils:
+- '4'
 libprotobuf:
 - 6.31.1
 macos_machine:

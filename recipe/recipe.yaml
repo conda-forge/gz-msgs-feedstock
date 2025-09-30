@@ -1,16 +1,16 @@
 context:
-  version: "11.1.0"
-  major_version: "11"
+  version: "12.0.0"
+  major_version: "12"
   component_name: "msgs"
-  component_version: "msgs11"
+  component_version: "msgs12"
   repo_name: "gz-msgs"
-  name: "gz-msgs11"
-  cxx_name: "libgz-msgs11"
-  python_name: "gz-msgs11-python"
+  name: "gz-msgs"
+  cxx_name: "libgz-msgs"
+  python_name: "gz-msgs-python"
   protobuf_version: "6.31.1"
   protobuf_major_version: "6"
   next_protobuf_major_version: "7"
-  build_number: 1
+  build_number: 0
 
 recipe:
   name: ${{ name }}
@@ -18,7 +18,7 @@ recipe:
 
 source:
   - url: "https://github.com/gazebosim/${{ repo_name }}/archive/${{ repo_name }}${{ major_version }}_${{ version }}.tar.gz"
-    sha256: "1eaa47500aa8a6fa65bcf76cf8d03c78d298e6da730ee2371b119dff732b639d"
+    sha256: "6813a5353569c049a56c83612b936a36ea725d98adefb40154f163812a5496e0"
     patches:
       - win_enable_py_tests.patch
 
@@ -50,18 +50,18 @@ outputs:
         # Cross-compiling dependencies
         - if: build_platform != target_platform
           then:
-            - libgz-cmake4
-            - libgz-math8
-            - libgz-tools2
+            - libgz-cmake
+            - libgz-math
+            - libgz-tools
             - tinyxml2
             - libabseil
             - libprotobuf
       host:
         - python ${{ python_min }}.*
-        - libgz-cmake4
-        - libgz-utils3
-        - libgz-math8
-        - libgz-tools2
+        - libgz-cmake
+        - libgz-utils
+        - libgz-math
+        - libgz-tools
         - tinyxml2
         - libabseil
         - libprotobuf
@@ -107,14 +107,14 @@ outputs:
         # Cross-compiling dependencies
         - if: build_platform != target_platform
           then:
-            - libgz-math8
-            - libgz-tools2
+            - libgz-math
+            - libgz-tools
             - tinyxml2
             - libabseil
             - libprotobuf
       host:
-        - libgz-math8
-        - libgz-tools2
+        - libgz-math
+        - libgz-tools
         - tinyxml2
         - libabseil
         - libprotobuf
@@ -132,7 +132,7 @@ outputs:
     tests:
       - python:
           imports:
-            - gz.msgs11
+            - gz.msgs
           python_version: ${{ python_min }}.*
 
   - package:
@@ -162,7 +162,7 @@ outputs:
               - if not exist %PREFIX%\\Library\\lib\\cmake\\${{ name }}\\${{ name }}-config.cmake exit 1
       - python:
           imports:
-            - gz.msgs11
+            - gz.msgs
       # Regression test for https://github.com/conda-forge/gz-transport-feedstock/pull/68#issuecomment-3106484363
       # Failed with Error,  Test failed: Failed to copy test files: FileSystem error: 'Path "/var/folders/vk/nx37ffx50hv5djclhltc26vw0000gn/T/.tmpC44c2n/" already exists!'
       # disabled for now
