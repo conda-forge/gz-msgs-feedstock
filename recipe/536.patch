@@ -1,0 +1,83 @@
+From 40e7ba336a98cdb2e0e1509c9e7b69f766a382f0 Mon Sep 17 00:00:00 2001
+From: Silvio Traversaro <silvio@traversaro.it>
+Date: Sun, 5 Oct 2025 18:36:13 +0200
+Subject: [PATCH] Only call find_package(Python3 REQUIRED COMPONENTS
+ Interpreter) if strictly necessary
+
+Signed-off-by: Silvio Traversaro <silvio@traversaro.it>
+---
+ cmake/gz_msgs_factory.cmake  | 4 ++++
+ cmake/gz_msgs_generate.cmake | 3 +++
+ cmake/gz_msgs_protoc.cmake   | 3 +++
+ gz-msgs-extras.cmake.in      | 8 ++++----
+ 4 files changed, 14 insertions(+), 4 deletions(-)
+
+diff --git a/cmake/gz_msgs_factory.cmake b/cmake/gz_msgs_factory.cmake
+index 2af59ffa..37350d87 100644
+--- a/cmake/gz_msgs_factory.cmake
++++ b/cmake/gz_msgs_factory.cmake
+@@ -31,6 +31,10 @@ function(gz_msgs_factory)
+     set(gz_msgs_factory_PYTHON_INTERPRETER Python3::Interpreter)
+   endif()
+ 
++  if(gz_msgs_factory_PYTHON_INTERPRETER STREQUAL "Python3::Interpreter" AND NOT TARGET Python3::Interpreter)
++    find_package(Python3 REQUIRED COMPONENTS Interpreter)
++  endif()
++
+   _gz_msgs_proto_pkg_to_path(${gz_msgs_factory_PROTO_PACKAGE} proto_package_dir)
+ 
+   set(output_header "${gz_msgs_factory_OUTPUT_CPP_DIR}/${proto_package_dir}/MessageTypes.hh")
+diff --git a/cmake/gz_msgs_generate.cmake b/cmake/gz_msgs_generate.cmake
+index 466b1f17..3cd5db80 100644
+--- a/cmake/gz_msgs_generate.cmake
++++ b/cmake/gz_msgs_generate.cmake
+@@ -41,6 +41,9 @@ function(gz_msgs_generate_messages_impl)
+   if (NOT DEFINED generate_messages_PYTHON_INTERPRETER)
+     set(generate_messages_PYTHON_INTERPRETER Python3::Interpreter)
+   endif()
++  if(generate_messages_PYTHON_INTERPRETER STREQUAL "Python3::Interpreter" AND NOT TARGET Python3::Interpreter)
++    find_package(Python3 REQUIRED COMPONENTS Interpreter)
++  endif()
+   if (NOT DEFINED generate_messages_PROTOC_EXEC)
+     set(generate_messages_PROTOC_EXEC protobuf::protoc)
+   endif()
+diff --git a/cmake/gz_msgs_protoc.cmake b/cmake/gz_msgs_protoc.cmake
+index 863d6b64..897024f3 100644
+--- a/cmake/gz_msgs_protoc.cmake
++++ b/cmake/gz_msgs_protoc.cmake
+@@ -43,6 +43,9 @@ function(gz_msgs_protoc)
+   if (NOT DEFINED gz_msgs_protoc_PYTHON_INTERPRETER)
+     set(gz_msgs_protoc_PYTHON_INTERPRETER Python3::Interpreter)
+   endif()
++  if(gz_msgs_protoc_PYTHON_INTERPRETER STREQUAL "Python3::Interpreter" AND NOT TARGET Python3::Interpreter)
++    find_package(Python3 REQUIRED COMPONENTS Interpreter)
++  endif()
+   if (NOT DEFINED gz_msgs_protoc_PROTOC_EXEC)
+     set(gz_msgs_protoc_PROTOC_EXEC protobuf::protoc)
+   endif()
+diff --git a/gz-msgs-extras.cmake.in b/gz-msgs-extras.cmake.in
+index 7c322b1d..5252aa88 100644
+--- a/gz-msgs-extras.cmake.in
++++ b/gz-msgs-extras.cmake.in
+@@ -14,10 +14,6 @@
+ 
+ # copied from gz-msgs/gz-msgs-extras.cmake
+ 
+-if(NOT TARGET Python3::Interpreter)
+-  find_package(Python3 REQUIRED COMPONENTS Interpreter)
+-endif()
+-
+ include(${@PROJECT_NAME@_DIR}/gz_msgs_string_utils.cmake)
+ include(${@PROJECT_NAME@_DIR}/gz_msgs_protoc.cmake)
+ include(${@PROJECT_NAME@_DIR}/gz_msgs_factory.cmake)
+@@ -74,6 +70,10 @@ function(gz_msgs_generate_messages)
+   set(oneValueArgs MSGS_PATH TARGET PROTO_PACKAGE OUTPUT_DIRECTORY)
+   set(multiValueArgs MSGS_PROTOS DEPENDENCIES)
+ 
++  if(@PROJECT_NAME@_PYTHON_INTERPRETER STREQUAL "Python3::Interpreter" AND NOT TARGET Python3::Interpreter)
++    find_package(Python3 REQUIRED COMPONENTS Interpreter)
++  endif()
++
+   cmake_parse_arguments(generate_messages "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
+   gz_msgs_generate_messages_lib(
+     PYTHON_INTERPRETER
