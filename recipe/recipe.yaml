@@ -10,7 +10,7 @@ context:
   protobuf_version: "6.31.1"
   protobuf_major_version: "6"
   next_protobuf_major_version: "7"
-  build_number: 0
+  build_number: 1
 
 recipe:
   name: ${{ name }}
@@ -21,6 +21,7 @@ source:
     sha256: "6813a5353569c049a56c83612b936a36ea725d98adefb40154f163812a5496e0"
     patches:
       - win_enable_py_tests.patch
+      - 536.patch
 
 build:
   number: ${{ build_number }}
