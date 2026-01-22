@@ -1,5 +1,5 @@
 context:
-  version: "12.0.0"
+  version: "12.0.1"
   major_version: "12"
   component_name: "msgs"
   component_version: "msgs12"
@@ -10,7 +10,7 @@ context:
   protobuf_version: "6.31.1"
   protobuf_major_version: "6"
   next_protobuf_major_version: "7"
-  build_number: 1
+  build_number: 0
 
 recipe:
   name: ${{ name }}
@@ -18,10 +18,9 @@ recipe:
 
 source:
   - url: "https://github.com/gazebosim/${{ repo_name }}/archive/${{ repo_name }}${{ major_version }}_${{ version }}.tar.gz"
-    sha256: "6813a5353569c049a56c83612b936a36ea725d98adefb40154f163812a5496e0"
+    sha256: "09d3579251cc8a7806964fbf9190c596b5a62aeec5c3f9e9e41f3f5578bd0b7c"
     patches:
       - win_enable_py_tests.patch
-      - 536.patch
 
 build:
   number: ${{ build_number }}
