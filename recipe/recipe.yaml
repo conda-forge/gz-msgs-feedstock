@@ -21,7 +21,6 @@ source:
     sha256: "09d3579251cc8a7806964fbf9190c596b5a62aeec5c3f9e9e41f3f5578bd0b7c"
     patches:
       - win_enable_py_tests.patch
-      - 536.patch
 
 build:
   number: ${{ build_number }}
