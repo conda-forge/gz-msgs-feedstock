@@ -10,7 +10,7 @@ context:
   protobuf_version: "6.31.1"
   protobuf_major_version: "6"
   next_protobuf_major_version: "7"
-  build_number: 0
+  build_number: 1
 
 recipe:
   name: ${{ name }}
