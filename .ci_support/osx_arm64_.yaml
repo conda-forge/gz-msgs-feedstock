@@ -19,7 +19,7 @@ cxx_compiler:
 cxx_compiler_version:
 - '19'
 libabseil:
-- '20250512'
+- '20260107'
 libgz_cmake:
 - '5'
 libgz_math:
@@ -29,7 +29,7 @@ libgz_tools:
 libgz_utils:
 - '4'
 libprotobuf:
-- 6.31.1
+- 6.33.5
 macos_machine:
 - arm64-apple-darwin20.0.0
 python_min:
