@@ -5,9 +5,6 @@
 if [[ "${host_platform}" == osx-* ]]; then
     # See https://conda-forge.org/docs/maintainer/knowledge_base.html#newer-c-features-with-old-sdk
     export CXXFLAGS="${CXXFLAGS} -D_LIBCPP_DISABLE_AVAILABILITY"
-fi
-
-if [[ "${host_platform}" == osx-arm64 ]]; then
     # workaround for https://github.com/prefix-dev/rattler-build/issues/1784#issuecomment-3089643907
     activate_clang
     activate_clangxx
